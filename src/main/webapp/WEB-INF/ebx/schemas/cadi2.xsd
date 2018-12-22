@@ -1,0 +1,2403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--XML schema generated from EBX5 DMA instance [reference=ebxps-cadi-datamodel] on Wed Jan 03 15:09:01 GMT 2018 by user [admin].-->
+<xs:schema xmlns:osd="urn:ebx-schemas:common_1.0" xmlns:fmt="urn:ebx-schemas:format_1.0" xmlns:ebxbnd="urn:ebx-schemas:binding_1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ebxs="urn:ebx-schemas:session_1.0">
+    <xs:import namespace="urn:ebx-schemas:common_1.0" schemaLocation="http://schema.orchestranetworks.com/common_1.0.xsd"/>
+    <xs:import namespace="urn:ebx-schemas:session_1.0" schemaLocation="http://schema.orchestranetworks.com/session_1.0.xsd"/>
+    <xs:annotation>
+        <xs:appinfo>
+            <osd:inheritance>
+                <dataSetInheritance>none</dataSetInheritance>
+            </osd:inheritance>
+            <ebxbnd:binding targetDirectory="/Users/craigcox/Development/d/ebx.svr/gbr/ebxps-cadi/src">
+                <javaPathConstants typeName="com.ebxps.cadi.Paths">
+                    <nodes root="/" prefix="" relativeToRoot="true"/>
+                </javaPathConstants>
+            </ebxbnd:binding>
+        </xs:appinfo>
+    </xs:annotation>
+    <xs:element name="root" osd:access="--">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="CADIprocesses" minOccurs="0" maxOccurs="unbounded">
+                    <xs:annotation>
+                        <xs:documentation xml:lang="en-US">
+                            <osd:label>CADI processes</osd:label>
+                        </xs:documentation>
+                        <xs:appinfo>
+                            <osd:table>
+                                <primaryKeys>/cadiProcessId </primaryKeys>
+                            </osd:table>
+                        </xs:appinfo>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="cadiProcessId" type="xs:int" minOccurs="1" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Process Id</osd:label>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:autoIncrement/>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="cadiProcess" type="xs:string" minOccurs="0" maxOccurs="0">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Process Log</osd:label>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:association>
+                                            <tableRefInverse>
+                                                <fieldToSource>/root/CADImonitor/CADIImportProcess/cadiProcessId</fieldToSource>
+                                            </tableRefInverse>
+                                        </osd:association>
+                                        <osd:defaultView>
+                                            <hiddenInDataServices>true</hiddenInDataServices>
+                                            <displayMode>tab</displayMode>
+                                            <tabularView>
+                                                <column>/cadiid</column>
+                                                <column>/cadiProcessState</column>
+                                                <column>/cadiName</column>
+                                                <column>/cadiTargetDataspace</column>
+                                                <column>/cadiTargetDataset</column>
+                                                <sort>
+                                                    <nodePath>/cadiProcessId</nodePath>
+                                                    <isAscending>true</isAscending>
+                                                </sort>
+                                                <sort>
+                                                    <nodePath>/cadiid</nodePath>
+                                                    <isAscending>true</isAscending>
+                                                </sort>
+                                            </tabularView>
+                                        </osd:defaultView>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="cadiLaunchRequestTime" type="xs:dateTime" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Launch requested at</osd:label>
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="cadiProcessState" minOccurs="0" maxOccurs="1" default="Q">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>State</osd:label>
+                                    </xs:documentation>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:length value="1"/>
+                                        <xs:enumeration osd:label="Queued" value="Q"/>
+                                        <xs:enumeration osd:label="Held" value="H"/>
+                                        <xs:enumeration osd:label="Active" value="A"/>
+                                        <xs:enumeration osd:label="Complete" value="C"/>
+                                        <xs:enumeration osd:label="Failed" value="F"/>
+                                        <xs:enumeration osd:label="Terminated" value="T"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="cadiProcessStateLastModified" type="xs:dateTime" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>State last modified</osd:label>
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="cadiLaunchDefinition" type="xs:string" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Select definition to launch</osd:label>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:otherFacets>
+                                            <osd:tableRef>
+                                                <tablePath>/root/CADIdefinitions/CADIdefinition</tablePath>
+                                            </osd:tableRef>
+                                        </osd:otherFacets>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="cadiLaunchDefinitionCode" type="xs:string" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Enter launch definition code</osd:label>
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="cadiBatchId" type="xs:string" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>BatchId</osd:label>
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                    <xs:unique name="UniqueOn_root_CADIprocessesA55E2F79-10EA-44F7-9D89-B6DFF8AE3E1D">
+                        <xs:selector xpath="."/>
+                        <xs:field xpath="cadiLaunchDefinition"/>
+                        <xs:field xpath="cadiBatchId"/>
+                    </xs:unique>
+                </xs:element>
+                <xs:element name="CADIdefinitions" minOccurs="1" maxOccurs="1">
+                    <xs:annotation>
+                        <xs:documentation xml:lang="en-US">
+                            <osd:label>Definitions</osd:label>
+                        </xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="CADIdefinition" minOccurs="0" maxOccurs="unbounded">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Import Definition</osd:label>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:table>
+                                            <primaryKeys>/cadiId </primaryKeys>
+                                            <defaultLabel>${./cadiName} {${./cadiId}}</defaultLabel>
+                                            <defaultView>
+                                                <displayOfGroups>tab</displayOfGroups>
+                                            </defaultView>
+                                        </osd:table>
+                                        <osd:trigger class="com.ebxps.cadi.tabletrigger.LastModifiedDate">
+                                            <lastModifiedDateField>./executionGroup/cadiLastModified</lastModifiedDateField>
+                                        </osd:trigger>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="cadiId" type="xs:int" minOccurs="1" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Id</osd:label>
+                                                    <osd:description>This field contains an automatically assigned number to uniquely identify the import definition.&#13;
+&#13;
+[ ${id} ]</osd:description>
+                                                </xs:documentation>
+                                                <xs:appinfo>
+                                                    <osd:autoIncrement/>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiName" minOccurs="1" maxOccurs="1" default="import definition">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Name</osd:label>
+                                                    <osd:description>Enter a short name to describe the import definition (up to 30 characters)&#13;
+[ ${name} ]</osd:description>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                    <xs:maxLength value="50"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="cadiDescription" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Desctiption</osd:label>
+                                                    <osd:description>Enter a description of the purpose of the import process.&#13;
+&#13;
+[ ${description} ]</osd:description>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                            <xs:simpleType>
+                                                <xs:restriction base="osd:text">
+                                                    <xs:maxLength value="2000"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="cadiProcessSequence" type="xs:int" minOccurs="1" maxOccurs="1" default="999999">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Processing order</osd:label>
+                                                    <osd:description>&#13;
+[ ${order} ]</osd:description>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiOwnerProfile" type="xs:string" minOccurs="1" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Owner profile</osd:label>
+                                                    <osd:description>Select a user or role to assign as the owner of this definition. &#13;
+Note if  you assign a user or role that does not include your own user profile you will not see the definition once created.&#13;
+Users defined as system Admin can see all definitions.&#13;
+[ ${owner} ]</osd:description>
+                                                </xs:documentation>
+                                                <xs:appinfo>
+                                                    <osd:otherFacets>
+                                                        <osd:constraintEnumeration class="com.ebxps.cadi.ui.EnumProfiles">
+                                                            <includeRoles>true</includeRoles>
+                                                            <includeUsers>true</includeUsers>
+                                                        </osd:constraintEnumeration>
+                                                    </osd:otherFacets>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiOpsRole" type="xs:string" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Operational owner</osd:label>
+                                                    <osd:description>Select the user or role to identify the users who should receive notification of process success or failure &#13;
+&#13;
+[ ${operations} ]</osd:description>
+                                                </xs:documentation>
+                                                <xs:appinfo>
+                                                    <osd:otherFacets>
+                                                        <osd:constraintEnumeration class="com.ebxps.cadi.ui.EnumProfiles">
+                                                            <includeRoles>true</includeRoles>
+                                                            <includeUsers>true</includeUsers>
+                                                        </osd:constraintEnumeration>
+                                                    </osd:otherFacets>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiDataSteward" type="xs:string" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Data steward</osd:label>
+                                                    <osd:description>Select the user or role to identify the users who is considered the data steward for the data being imported  &#13;
+&#13;
+[ ${datasteward} ]</osd:description>
+                                                </xs:documentation>
+                                                <xs:appinfo>
+                                                    <osd:otherFacets>
+                                                        <osd:constraintEnumeration class="com.ebxps.cadi.ui.EnumProfiles">
+                                                            <includeRoles>true</includeRoles>
+                                                            <includeUsers>true</includeUsers>
+                                                        </osd:constraintEnumeration>
+                                                    </osd:otherFacets>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiExecutionCode" minOccurs="0" maxOccurs="1" default="DEFAULT">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Definition code</osd:label>
+                                                    <osd:description>Enter a code value that can be used to launch this import definition, the value does not need to be unique.  &#13;
+When triggering an import using a table update  or web service this value can be used instead of the CADI identifier.&#13;
+If there are several definitions with the same code, they will all be executed using the relative processing order or CADI identifier.&#13;
+&#13;
+[ ${code} ]</osd:description>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                    <xs:maxLength value="15"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="cadiExclusivity" type="xs:string" minOccurs="0" maxOccurs="1" default="[ not in use ]" osd:access="R-">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Exclusivity</osd:label>
+                                                    <osd:description>Not currently used&#13;
+&#13;
+Select the exclusivity mode for this import definition.&#13;
+"MULITPLE"&#13;
+"SINGLE"&#13;
+"EXCLUSIVE"</osd:description>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiExceptionPolicy" minOccurs="1" maxOccurs="1" default="LOG-ONLY">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Exception policy</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                    <xs:enumeration osd:label="Log exceptions only" value="LOG-ONLY"/>
+                                                    <xs:enumeration osd:label="Log exceptions &amp; deactivate definition" value="LOG-DEACTIVATE"/>
+                                                    <xs:enumeration osd:label="Log exceptions &amp; deactivate for mandatory only" value="LOG-DEACTIVATE-MANDATORY"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="cadiBatchIdPolicy" minOccurs="1" maxOccurs="1" default="N">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Default batch id policy</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                    <xs:enumeration osd:label="No batch id" value="N"/>
+                                                    <xs:enumeration osd:label="CADI generated batch id" value="C"/>
+                                                    <xs:enumeration osd:label="File batch id" value="F"/>
+                                                    <xs:enumeration osd:label="Zip file batch id" value="Z"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="cadiExecByZip" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Use zip file?</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                    <xs:enumeration osd:label="No - use individual source files" value="N"/>
+                                                    <xs:enumeration osd:label="Yes - extract sources files from zip files" value="Y"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="cadiExecByBatch" type="xs:boolean" minOccurs="1" maxOccurs="1" default="false">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Execute by file batch</osd:label>
+                                                    <osd:description>&lt;b&gt;Yes&lt;/b&gt;: The import process will only start when all of tables specified as mandatory have a candidate file for the same file batch id.&lt;/br&gt;&#13;
+&lt;b&gt;No&lt;/b&gt;: The import process will only start when all of the tables specified as mandatory have a candidate file. </osd:description>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiMonitor" type="xs:boolean" minOccurs="0" maxOccurs="1" default="true">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Monitor</osd:label>
+                                                    <osd:description>YES: monitor for files to import for this definition.&#13;
+NO: exclude this definition from monitor process</osd:description>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiActive" type="xs:boolean" minOccurs="0" maxOccurs="1" default="true">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Active</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="executionGroup" minOccurs="1" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Execution data</osd:label>
+                                                </xs:documentation>
+                                                <xs:appinfo>
+                                                    <osd:defaultView>
+                                                        <displayMode>expanded</displayMode>
+                                                    </osd:defaultView>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="cadiLastModified" type="xs:dateTime" minOccurs="0" maxOccurs="1" osd:applyLastModification="ignored">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Last modified</osd:label>
+                                                                <osd:description>Date and time this entry was last modified.</osd:description>
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="cadiLastUsed" type="xs:dateTime" minOccurs="0" maxOccurs="1" osd:applyLastModification="ignored">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Last used</osd:label>
+                                                                <osd:description>Date and time this definition was last used to start an import process</osd:description>
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="cadiLastSuccessful" type="xs:dateTime" minOccurs="0" maxOccurs="1" osd:applyLastModification="ignored">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Last successful execution completed</osd:label>
+                                                                <osd:description>Date and time an import using this definition was successful</osd:description>
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="cadiLastFailed" type="xs:dateTime" minOccurs="0" maxOccurs="1" osd:applyLastModification="ignored">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Last failed execution completed</osd:label>
+                                                                <osd:description>Date and time that the last failed execution of an import using this definition completed.</osd:description>
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="dataspaceGroup" minOccurs="1" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Dataspace</osd:label>
+                                                    <osd:description>Contains the information used to define the data space the data will be imported into.</osd:description>
+                                                </xs:documentation>
+                                                <xs:appinfo>
+                                                    <osd:defaultView>
+                                                        <displayMode>tab</displayMode>
+                                                    </osd:defaultView>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="cadiDataspacePolicy" minOccurs="1" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Import target data space policy</osd:label>
+                                                                <osd:description>Select the appropriate data space policy for this definition.</osd:description>
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                        <xs:simpleType>
+                                                            <xs:restriction base="xs:string">
+                                                                <xs:enumeration osd:label="Use named data space" value="N"/>
+                                                                <xs:enumeration osd:label="Create a child of the named data space" value="C"/>
+                                                            </xs:restriction>
+                                                        </xs:simpleType>
+                                                    </xs:element>
+                                                    <xs:element name="cadiDataspace" type="xs:string" minOccurs="1" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Data space</osd:label>
+                                                            </xs:documentation>
+                                                            <xs:appinfo>
+                                                                <osd:otherFacets>
+                                                                    <osd:constraintEnumeration class="com.ebxps.cadi.ui.EnumDataspace"/>
+                                                                </osd:otherFacets>
+                                                            </xs:appinfo>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="cadiChildDataspaceName" type="xs:string" minOccurs="0" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Child data space name</osd:label>
+                                                            </xs:documentation>
+                                                            <xs:appinfo>
+                                                                <osd:information>SHOW-WHEN:cadiDataspacePolicy="C"</osd:information>
+                                                            </xs:appinfo>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="cadiChildDataspaceLabel" type="xs:string" minOccurs="0" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Child data space label</osd:label>
+                                                            </xs:documentation>
+                                                            <xs:appinfo>
+                                                                <osd:information>SHOW-WHEN:cadiDataspacePolicy="C"</osd:information>
+                                                            </xs:appinfo>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="cadiChildDataspaceDescription" type="xs:string" minOccurs="0" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Child data space description</osd:label>
+                                                            </xs:documentation>
+                                                            <xs:appinfo>
+                                                                <osd:information>SHOW-WHEN:cadiDataspacePolicy="C"</osd:information>
+                                                            </xs:appinfo>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="cadiChildDataspacePermissions" type="xs:string" minOccurs="0" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Child data space permissions</osd:label>
+                                                            </xs:documentation>
+                                                            <xs:appinfo>
+                                                                <osd:otherFacets>
+                                                                    <osd:constraintEnumeration class="com.ebxps.cadi.ui.EnumDataspace"/>
+                                                                </osd:otherFacets>
+                                                                <osd:information>SHOW-WHEN:cadiDataspacePolicy="C"</osd:information>
+                                                            </xs:appinfo>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="cadiDataspaceClosure" minOccurs="0" maxOccurs="1" default="L">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Data space closure policy</osd:label>
+                                                            </xs:documentation>
+                                                            <xs:appinfo>
+                                                                <osd:information>SHOW-WHEN:cadiDataspacePolicy="C"</osd:information>
+                                                            </xs:appinfo>
+                                                        </xs:annotation>
+                                                        <xs:simpleType>
+                                                            <xs:restriction base="xs:string">
+                                                                <xs:length value="1"/>
+                                                                <xs:enumeration osd:label="Leave the data space open" value="L"/>
+                                                                <xs:enumeration osd:label="Merge after successful import" value="M"/>
+                                                                <xs:enumeration osd:label="Merge after validated successful import" value="V"/>
+                                                            </xs:restriction>
+                                                        </xs:simpleType>
+                                                    </xs:element>
+                                                    <xs:element name="cadiDefaultDataset" type="xs:string" minOccurs="1" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Default data set</osd:label>
+                                                            </xs:documentation>
+                                                            <xs:appinfo>
+                                                                <osd:otherFacets>
+                                                                    <osd:constraintEnumeration class="com.ebxps.cadi.ui.EnumDataset">
+                                                                        <dataspace>../cadiDataspace</dataspace>
+                                                                    </osd:constraintEnumeration>
+                                                                </osd:otherFacets>
+                                                            </xs:appinfo>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="cadiResolvedDataspaceName" type="xs:string" minOccurs="0" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Resolved data space name</osd:label>
+                                                            </xs:documentation>
+                                                            <xs:appinfo>
+                                                                <osd:computationRule>
+                                                                    <predicate>condition(osd:is-equal-case-insensitive(./dataspaceGroup/cadiDataspacePolicy,'N'),ifTrue(./dataspaceGroup/cadiDataspace),ifFalse(./dataspaceGroup/cadiChildDataspaceName))</predicate>
+                                                                </osd:computationRule>
+                                                                <osd:information>SHOW-WHEN:cadiDataspacePolicy="X"</osd:information>
+                                                            </xs:appinfo>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="zipFileGroup" minOccurs="1" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Zip file</osd:label>
+                                                </xs:documentation>
+                                                <xs:appinfo>
+                                                    <osd:defaultView>
+                                                        <displayMode>tab</displayMode>
+                                                    </osd:defaultView>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="cadiZipFileName" type="xs:string" minOccurs="0" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Zip file name</osd:label>
+                                                            </xs:documentation>
+                                                            <xs:appinfo>
+                                                                <osd:information>SHOW-WHEN:/cadiExecByZip="Y"</osd:information>
+                                                            </xs:appinfo>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="cadiZipFolderPath" type="xs:string" minOccurs="0" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Folder path</osd:label>
+                                                            </xs:documentation>
+                                                            <xs:appinfo>
+                                                                <osd:information>SHOW-WHEN:/cadiExecByZip="Y"</osd:information>
+                                                            </xs:appinfo>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="cadiZipBatchIdRegex" type="xs:string" minOccurs="0" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Zip batch id pattern</osd:label>
+                                                            </xs:documentation>
+                                                            <xs:appinfo>
+                                                                <osd:information>SHOW-WHEN:/cadiBatchIdPolicy="Z" and /cadiExecByZip="Y"</osd:information>
+                                                            </xs:appinfo>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="cadiZipWorkingFolderPath" type="xs:string" minOccurs="0" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Working folder</osd:label>
+                                                                <osd:description>This folder is used to store the files extracted from the zip file to be processed for the import definition.</osd:description>
+                                                            </xs:documentation>
+                                                            <xs:appinfo>
+                                                                <osd:information>SHOW-WHEN:/cadiExecByZip="Y"</osd:information>
+                                                            </xs:appinfo>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="cadiZipArchiveFolderPath" type="xs:string" minOccurs="0" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Zip archive folder path</osd:label>
+                                                            </xs:documentation>
+                                                            <xs:appinfo>
+                                                                <osd:information>SHOW-WHEN:/cadiExecByZip="Y"</osd:information>
+                                                            </xs:appinfo>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="cadiZipKeepArchiveHours" type="xs:int" minOccurs="0" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Keep zip files for (hours)</osd:label>
+                                                            </xs:documentation>
+                                                            <xs:appinfo>
+                                                                <osd:information>SHOW-WHEN:/cadiExecByZip="Y"</osd:information>
+                                                            </xs:appinfo>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="cadiZipFailedFolderPath" type="xs:string" minOccurs="0" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Zip failed folder path</osd:label>
+                                                            </xs:documentation>
+                                                            <xs:appinfo>
+                                                                <osd:information>SHOW-WHEN:/cadiExecByZip="Y"</osd:information>
+                                                            </xs:appinfo>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="cadiZipKeepFailedHours" type="xs:int" minOccurs="0" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Keep failed zip files for (hours)</osd:label>
+                                                            </xs:documentation>
+                                                            <xs:appinfo>
+                                                                <osd:information>SHOW-WHEN:/cadiExecByZip="Y"</osd:information>
+                                                            </xs:appinfo>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="cadiCrcFileNameExtension" type="xs:string" minOccurs="0" maxOccurs="1" default="MD5">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>CRC file name extension</osd:label>
+                                                            </xs:documentation>
+                                                            <xs:appinfo>
+                                                                <osd:information>SHOW-WHEN:/cadiExecByZip="Y"</osd:information>
+                                                            </xs:appinfo>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="cadiZipNotUsed" type="xs:boolean" minOccurs="0" maxOccurs="1" default="true">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Zip files not used</osd:label>
+                                                            </xs:documentation>
+                                                            <xs:appinfo>
+                                                                <osd:information>SHOW-WHEN:/cadiExecByZip="N"</osd:information>
+                                                            </xs:appinfo>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="tablesGroup" minOccurs="1" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Import targets</osd:label>
+                                                </xs:documentation>
+                                                <xs:appinfo>
+                                                    <osd:defaultView>
+                                                        <displayMode>tab</displayMode>
+                                                    </osd:defaultView>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="cadiTables" type="xs:string" minOccurs="0" maxOccurs="0">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Import targets</osd:label>
+                                                            </xs:documentation>
+                                                            <xs:appinfo>
+                                                                <osd:association>
+                                                                    <tableRefInverse>
+                                                                        <fieldToSource>/root/CADIdefinitions/CADItargetTables/cadiDefinition</fieldToSource>
+                                                                    </tableRefInverse>
+                                                                </osd:association>
+                                                                <osd:defaultView>
+                                                                    <hiddenInDataServices>true</hiddenInDataServices>
+                                                                    <displayMode>inline</displayMode>
+                                                                    <tabularView>
+                                                                        <column>/cadiTableSequence</column>
+                                                                        <column>/cadiTargetDataspace</column>
+                                                                        <column>/cadiTargetDataset</column>
+                                                                        <column>/cadiTargetTable</column>
+                                                                        <column>/cadiTableOptional</column>
+                                                                        <column>/cadiBatchIdPolicy</column>
+                                                                        <sort>
+                                                                            <nodePath>/cadiTableSequence</nodePath>
+                                                                            <isAscending>true</isAscending>
+                                                                        </sort>
+                                                                        <sort>
+                                                                            <nodePath>/cadiTableId</nodePath>
+                                                                            <isAscending>true</isAscending>
+                                                                        </sort>
+                                                                    </tabularView>
+                                                                </osd:defaultView>
+                                                            </xs:appinfo>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="workflowGroup" minOccurs="1" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Workflow</osd:label>
+                                                </xs:documentation>
+                                                <xs:appinfo>
+                                                    <osd:defaultView>
+                                                        <displayMode>tab</displayMode>
+                                                    </osd:defaultView>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="cadiLaunchWorkflow" minOccurs="1" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Launch workflow</osd:label>
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                        <xs:simpleType>
+                                                            <xs:restriction base="xs:string">
+                                                                <xs:enumeration osd:label="Yes - when file imports are complete" value="Y"/>
+                                                                <xs:enumeration osd:label="No - do not launch a work flow on successful import." value="N"/>
+                                                            </xs:restriction>
+                                                        </xs:simpleType>
+                                                    </xs:element>
+                                                    <xs:element name="cadiWorkflowName" type="xs:string" minOccurs="0" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Workflow published name</osd:label>
+                                                            </xs:documentation>
+                                                            <xs:appinfo>
+                                                                <osd:information>SHOW-WHEN:/workflowGroup/cadiLaunchWorkflow="Y"</osd:information>
+                                                            </xs:appinfo>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="workflowParametersGroup" minOccurs="1" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Workflow parameters</osd:label>
+                                                            </xs:documentation>
+                                                            <xs:appinfo>
+                                                                <osd:information>SHOW-WHEN:/workflowGroup/cadiLaunchWorkflow="Y"</osd:information>
+                                                                <osd:defaultView>
+                                                                    <displayMode>expanded</displayMode>
+                                                                </osd:defaultView>
+                                                            </xs:appinfo>
+                                                        </xs:annotation>
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="cadiParamProcessId" type="xs:string" minOccurs="0" maxOccurs="1" default="cadiprocessid">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation xml:lang="en-US">
+                                                                            <osd:label>Process id context name</osd:label>
+                                                                        </xs:documentation>
+                                                                    </xs:annotation>
+                                                                </xs:element>
+                                                                <xs:element name="cadiParamDataspace" type="xs:string" minOccurs="0" maxOccurs="1" default="dataspace">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation xml:lang="en-US">
+                                                                            <osd:label>Data space context name</osd:label>
+                                                                            <osd:description>Enter the name of the data context variable in the published workflow for the data space name  which was the target fro the import.</osd:description>
+                                                                        </xs:documentation>
+                                                                        <xs:appinfo>
+                                                                            <osd:information>SHOW-WHEN:/workflowGroup/cadiLaunchWorkflow="Y"</osd:information>
+                                                                        </xs:appinfo>
+                                                                    </xs:annotation>
+                                                                </xs:element>
+                                                                <xs:element name="cadiParamDataset" type="xs:string" minOccurs="0" maxOccurs="1" default="dataset">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation xml:lang="en-US">
+                                                                            <osd:label>Data set context name</osd:label>
+                                                                            <osd:description>Enter the name of the data context variable in the published workflow for the data set name  which was the target fro the import.</osd:description>
+                                                                        </xs:documentation>
+                                                                        <xs:appinfo>
+                                                                            <osd:information>SHOW-WHEN:/workflowGroup/cadiLaunchWorkflow="Y"</osd:information>
+                                                                        </xs:appinfo>
+                                                                    </xs:annotation>
+                                                                </xs:element>
+                                                                <xs:element name="cadiWorkflowParam" type="cadiParam" minOccurs="0" maxOccurs="unbounded" osd:class="com.ebxps.cadi.adpatation.CadiWorkflowParameter">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation xml:lang="en-US">
+                                                                            <osd:label>Addtional workflow parameters</osd:label>
+                                                                        </xs:documentation>
+                                                                        <xs:appinfo>
+                                                                            <osd:information>SHOW-WHEN:/workflowGroup/cadiLaunchWorkflow="Y"</osd:information>
+                                                                            <osd:defaultView>
+                                                                                <displayMode>expanded</displayMode>
+                                                                            </osd:defaultView>
+                                                                        </xs:appinfo>
+                                                                    </xs:annotation>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                    <xs:element name="cadiLaunchFailureWorkflow" minOccurs="1" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Launch failure workflow</osd:label>
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                        <xs:simpleType>
+                                                            <xs:restriction base="xs:string">
+                                                                <xs:enumeration osd:label="Yes - Launch workflow if import fails" value="Y"/>
+                                                                <xs:enumeration osd:label="No - Do not launch failure workflow" value="N"/>
+                                                            </xs:restriction>
+                                                        </xs:simpleType>
+                                                    </xs:element>
+                                                    <xs:element name="cadiFailedWorkflowNAme" type="xs:string" minOccurs="0" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Failed workflow published name</osd:label>
+                                                            </xs:documentation>
+                                                            <xs:appinfo>
+                                                                <osd:information>SHOW-WHEN:/workflowGroup/cadiLaunchFailureWorkflow="Y"</osd:information>
+                                                            </xs:appinfo>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="failedWorkflowParametersGroup" minOccurs="1" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Failed workflow parameters</osd:label>
+                                                            </xs:documentation>
+                                                            <xs:appinfo>
+                                                                <osd:information>SHOW-WHEN:/workflowGroup/cadiLaunchFailureWorkflow="Y"</osd:information>
+                                                                <osd:defaultView>
+                                                                    <displayMode>expanded</displayMode>
+                                                                </osd:defaultView>
+                                                            </xs:appinfo>
+                                                        </xs:annotation>
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="cadiParamDataspace" type="xs:string" minOccurs="0" maxOccurs="1" default="dataspace">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation xml:lang="en-US">
+                                                                            <osd:label>Data space context name</osd:label>
+                                                                            <osd:description>Enter the name of the data context variable in the published workflow for the data space name  which was the target fro the import.</osd:description>
+                                                                        </xs:documentation>
+                                                                        <xs:appinfo>
+                                                                            <osd:information>SHOW-WHEN:/workflowGroup/cadiLaunchFailureWorkflow="Y"</osd:information>
+                                                                        </xs:appinfo>
+                                                                    </xs:annotation>
+                                                                </xs:element>
+                                                                <xs:element name="cadiParamDataset" type="xs:string" minOccurs="0" maxOccurs="1" default="dataset">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation xml:lang="en-US">
+                                                                            <osd:label>Data set context name</osd:label>
+                                                                            <osd:description>Enter the name of the data context variable in the published workflow for the data set name  which was the target fro the import.</osd:description>
+                                                                        </xs:documentation>
+                                                                        <xs:appinfo>
+                                                                            <osd:information>SHOW-WHEN:/workflowGroup/cadiLaunchFailureWorkflow="Y"</osd:information>
+                                                                        </xs:appinfo>
+                                                                    </xs:annotation>
+                                                                </xs:element>
+                                                                <xs:element name="cadiWorkflowParam" type="cadiParam" minOccurs="0" maxOccurs="unbounded" osd:class="com.ebxps.cadi.adpatation.CadiWorkflowParameter">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation xml:lang="en-US">
+                                                                            <osd:label>Addtional workflow parameters</osd:label>
+                                                                        </xs:documentation>
+                                                                        <xs:appinfo>
+                                                                            <osd:information>SHOW-WHEN:/workflowGroup/cadiLaunchFailureWorkflow="Y"</osd:information>
+                                                                            <osd:defaultView>
+                                                                                <displayMode>expanded</displayMode>
+                                                                            </osd:defaultView>
+                                                                        </xs:appinfo>
+                                                                    </xs:annotation>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="CADItargetTables" minOccurs="0" maxOccurs="unbounded">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Target Tables</osd:label>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:table>
+                                            <primaryKeys>/cadiTableId </primaryKeys>
+                                            <defaultLabel>${./cadiTargetTable}</defaultLabel>
+                                        </osd:table>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="cadiTableId" type="xs:int" minOccurs="1" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Table ID</osd:label>
+                                                </xs:documentation>
+                                                <xs:appinfo>
+                                                    <osd:autoIncrement/>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiDefinition" type="xs:string" minOccurs="1" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Definition</osd:label>
+                                                </xs:documentation>
+                                                <xs:appinfo>
+                                                    <osd:otherFacets>
+                                                        <osd:tableRef>
+                                                            <tablePath>/root/CADIdefinitions/CADIdefinition</tablePath>
+                                                        </osd:tableRef>
+                                                    </osd:otherFacets>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiTableSequence" type="xs:int" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Table sequence</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiReferentialDataspaceName" type="xs:string" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Referential Data space</osd:label>
+                                                </xs:documentation>
+                                                <xs:appinfo>
+                                                    <osd:otherFacets>
+                                                        <osd:constraintEnumeration class="com.ebxps.cadi.ui.EnumDataspace"/>
+                                                    </osd:otherFacets>
+                                                    <osd:inheritance>
+                                                        <sourceRecord>/root/CADIdefinitions/CADItargetTables/cadiDefinition</sourceRecord>
+                                                        <sourceNode>./dataspaceGroup/cadiDataspace</sourceNode>
+                                                    </osd:inheritance>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiTargetDataspace" type="xs:string" minOccurs="1" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Target data space</osd:label>
+                                                </xs:documentation>
+                                                <xs:appinfo>
+                                                    <osd:inheritance>
+                                                        <sourceRecord>/root/CADIdefinitions/CADItargetTables/cadiDefinition</sourceRecord>
+                                                        <sourceNode>./dataspaceGroup/cadiResolvedDataspaceName</sourceNode>
+                                                    </osd:inheritance>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiTargetDataset" type="xs:string" minOccurs="1" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Target dataset</osd:label>
+                                                </xs:documentation>
+                                                <xs:appinfo>
+                                                    <osd:otherFacets>
+                                                        <osd:constraintEnumeration class="com.ebxps.cadi.ui.EnumDataset">
+                                                            <dataspace>../cadiReferentialDataspaceName</dataspace>
+                                                        </osd:constraintEnumeration>
+                                                    </osd:otherFacets>
+                                                    <osd:inheritance>
+                                                        <sourceRecord>/root/CADIdefinitions/CADItargetTables/cadiDefinition</sourceRecord>
+                                                        <sourceNode>./dataspaceGroup/cadiDefaultDataset</sourceNode>
+                                                    </osd:inheritance>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiTargetTable" type="xs:string" minOccurs="1" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Target table</osd:label>
+                                                </xs:documentation>
+                                                <xs:appinfo>
+                                                    <osd:otherFacets>
+                                                        <osd:constraintEnumeration class="com.ebxps.cadi.ui.EnumTable">
+                                                            <dataset>../cadiTargetDataset</dataset>
+                                                            <dataspace>../cadiReferentialDataspaceName</dataspace>
+                                                        </osd:constraintEnumeration>
+                                                    </osd:otherFacets>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiTableOptional" type="xs:boolean" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Table optional</osd:label>
+                                                    <osd:description>&lt;b&gt;Yes&lt;/b&gt;: There does not have to be a file to import into this table for the import process to start.&lt;/br&gt;&#13;
+&lt;b&gt;No&lt;/b&gt;: There must be a file to import into this table for the import process to start.</osd:description>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiBatchIdPolicy" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Table batch id policy</osd:label>
+                                                </xs:documentation>
+                                                <xs:appinfo>
+                                                    <osd:inheritance>
+                                                        <sourceRecord>/root/CADIdefinitions/CADItargetTables/cadiDefinition</sourceRecord>
+                                                        <sourceNode>./cadiBatchIdPolicy</sourceNode>
+                                                    </osd:inheritance>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                    <xs:enumeration osd:label="No batch id" value="N"/>
+                                                    <xs:enumeration osd:label="CADI generated batch id" value="C"/>
+                                                    <xs:enumeration osd:label="File batch id" value="F"/>
+                                                    <xs:enumeration osd:label="Zip file batch id" value="Z"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="cadiSourceFiles" type="xs:string" minOccurs="0" maxOccurs="0">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Source files</osd:label>
+                                                </xs:documentation>
+                                                <xs:appinfo>
+                                                    <osd:association>
+                                                        <tableRefInverse>
+                                                            <fieldToSource>/root/CADIdefinitions/CADIimportFiles/cadiTatgetTable</fieldToSource>
+                                                        </tableRefInverse>
+                                                    </osd:association>
+                                                    <osd:defaultView>
+                                                        <hiddenInDataServices>true</hiddenInDataServices>
+                                                        <displayMode>inline</displayMode>
+                                                        <tabularView>
+                                                            <column>/cadiSourceFileGroup/cadiFileName</column>
+                                                            <column>/cadiSourceFileGroup/cadiFileFolder</column>
+                                                            <column>/cadiSourceFileGroup/cadiFileImportMode</column>
+                                                            <column>/cadiSourceFileGroup/cadiArchiveFolder</column>
+                                                            <column>/cadiSourceFileGroup/cadiFailedFolderPath</column>
+                                                            <sort>
+                                                                <nodePath>/cadiId</nodePath>
+                                                                <isAscending>true</isAscending>
+                                                            </sort>
+                                                        </tabularView>
+                                                    </osd:defaultView>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="CADIimportFiles" minOccurs="0" maxOccurs="unbounded">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Import Files</osd:label>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:table>
+                                            <primaryKeys>/cadiId </primaryKeys>
+                                            <defaultLabel>${./cadiSourceFileGroup/cadiFileFolder}${./cadiSourceFileGroup/cadiFileName}</defaultLabel>
+                                        </osd:table>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="cadiId" type="xs:int" minOccurs="1" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Id</osd:label>
+                                                </xs:documentation>
+                                                <xs:appinfo>
+                                                    <osd:autoIncrement/>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiTatgetTable" type="xs:string" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Target table</osd:label>
+                                                </xs:documentation>
+                                                <xs:appinfo>
+                                                    <osd:otherFacets>
+                                                        <osd:tableRef>
+                                                            <tablePath>/root/CADIdefinitions/CADItargetTables</tablePath>
+                                                        </osd:tableRef>
+                                                    </osd:otherFacets>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiFileDescription" type="osd:text" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Description</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiSourceFileGroup" minOccurs="1" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:appinfo>
+                                                    <osd:defaultView>
+                                                        <displayMode>expanded</displayMode>
+                                                    </osd:defaultView>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="cadiFileName" type="xs:string" minOccurs="0" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>File name</osd:label>
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="cadiFileFolder" type="xs:string" minOccurs="0" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Folder path</osd:label>
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="cadiFileImportMode" minOccurs="0" maxOccurs="1" default="XML">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>File import mode</osd:label>
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                        <xs:simpleType>
+                                                            <xs:restriction base="xs:string">
+                                                                <xs:enumeration osd:label="Import CSV" value="CSV"/>
+                                                                <xs:enumeration osd:label="Import XML" value="XML"/>
+                                                                <xs:enumeration osd:label="Data Exchange" value="DEX"/>
+                                                            </xs:restriction>
+                                                        </xs:simpleType>
+                                                    </xs:element>
+                                                    <xs:element name="cadiCsvImportAttributes" minOccurs="0" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>CSV Import attributes</osd:label>
+                                                            </xs:documentation>
+                                                            <xs:appinfo>
+                                                                <osd:information>SHOW-WHEN:/cadiSourceFileGroup/cadiFileImportMode="CSV"</osd:information>
+                                                                <osd:defaultView>
+                                                                    <displayMode>expanded</displayMode>
+                                                                </osd:defaultView>
+                                                            </xs:appinfo>
+                                                        </xs:annotation>
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="cadiImportMode" minOccurs="0" maxOccurs="1" default="U">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation xml:lang="en-US">
+                                                                            <osd:label>Import mode</osd:label>
+                                                                        </xs:documentation>
+                                                                        <xs:appinfo>
+                                                                            <osd:information>SHOW-WHEN:/cadiSourceFileGroup/cadiFileImportMode="CSV"</osd:information>
+                                                                        </xs:appinfo>
+                                                                    </xs:annotation>
+                                                                    <xs:simpleType>
+                                                                        <xs:restriction base="xs:string">
+                                                                            <xs:enumeration osd:label="Update or Insert" value="U"/>
+                                                                            <xs:enumeration osd:label="Insert only" value="I"/>
+                                                                            <xs:enumeration osd:label="Update only" value="M"/>
+                                                                            <xs:enumeration osd:label="Replace (synchronise)" value="R"/>
+                                                                        </xs:restriction>
+                                                                    </xs:simpleType>
+                                                                </xs:element>
+                                                                <xs:element name="cadiFileEncoding" type="xs:string" minOccurs="0" maxOccurs="1" default="UTF-8">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation xml:lang="en-US">
+                                                                            <osd:label>File encoding</osd:label>
+                                                                        </xs:documentation>
+                                                                        <xs:appinfo>
+                                                                            <osd:information>SHOW-WHEN:/cadiSourceFileGroup/cadiFileImportMode="CSV"</osd:information>
+                                                                        </xs:appinfo>
+                                                                    </xs:annotation>
+                                                                </xs:element>
+                                                                <xs:element name="cadiColumnHeader" minOccurs="0" maxOccurs="1" default="L">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation xml:lang="en-US">
+                                                                            <osd:label>Column header</osd:label>
+                                                                        </xs:documentation>
+                                                                        <xs:appinfo>
+                                                                            <osd:information>SHOW-WHEN:/cadiSourceFileGroup/cadiFileImportMode="CSV"</osd:information>
+                                                                        </xs:appinfo>
+                                                                    </xs:annotation>
+                                                                    <xs:simpleType>
+                                                                        <xs:restriction base="xs:string">
+                                                                            <xs:enumeration osd:label="No header" value="N"/>
+                                                                            <xs:enumeration osd:label="Label" value="L"/>
+                                                                            <xs:enumeration osd:label="Field Xpath" value="X"/>
+                                                                        </xs:restriction>
+                                                                    </xs:simpleType>
+                                                                </xs:element>
+                                                                <xs:element name="cadiFieldSeparator" minOccurs="0" maxOccurs="1">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation xml:lang="en-US">
+                                                                            <osd:label>Field separator</osd:label>
+                                                                        </xs:documentation>
+                                                                        <xs:appinfo>
+                                                                            <osd:information>SHOW-WHEN:/cadiSourceFileGroup/cadiFileImportMode="CSV"</osd:information>
+                                                                        </xs:appinfo>
+                                                                    </xs:annotation>
+                                                                    <xs:simpleType>
+                                                                        <xs:restriction base="xs:string">
+                                                                            <xs:enumeration osd:label="Comma" value="C"/>
+                                                                            <xs:enumeration osd:label="Semicolon" value="S"/>
+                                                                            <xs:enumeration osd:label="Space" value="B"/>
+                                                                            <xs:enumeration osd:label="Tab" value="T"/>
+                                                                            <xs:enumeration osd:label="Other" value="O"/>
+                                                                        </xs:restriction>
+                                                                    </xs:simpleType>
+                                                                </xs:element>
+                                                                <xs:element name="cadiFieldSeparatorChar" type="xs:string" minOccurs="0" maxOccurs="1">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation xml:lang="en-US">
+                                                                            <osd:label>Field separator character</osd:label>
+                                                                        </xs:documentation>
+                                                                        <xs:appinfo>
+                                                                            <osd:information>SHOW-WHEN:/cadiSourceFileGroup/cadiFileImportMode="CSV" and /cadiSourceFileGroup/cadiCsvImportAttributes/cadiFieldSeparator="O"</osd:information>
+                                                                        </xs:appinfo>
+                                                                    </xs:annotation>
+                                                                </xs:element>
+                                                                <xs:element name="cadiListSeparator" minOccurs="0" maxOccurs="1">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation xml:lang="en-US">
+                                                                            <osd:label>List separator</osd:label>
+                                                                        </xs:documentation>
+                                                                        <xs:appinfo>
+                                                                            <osd:information>SHOW-WHEN:/cadiSourceFileGroup/cadiFileImportMode="CSV"</osd:information>
+                                                                        </xs:appinfo>
+                                                                    </xs:annotation>
+                                                                    <xs:simpleType>
+                                                                        <xs:restriction base="xs:string">
+                                                                            <xs:enumeration osd:label="Comma" value="C"/>
+                                                                            <xs:enumeration osd:label="Line return" value="L"/>
+                                                                            <xs:enumeration osd:label="Semicolon" value="S"/>
+                                                                            <xs:enumeration osd:label="Space" value="B"/>
+                                                                            <xs:enumeration osd:label="Tab" value="T"/>
+                                                                            <xs:enumeration osd:label="Other" value="O"/>
+                                                                        </xs:restriction>
+                                                                    </xs:simpleType>
+                                                                </xs:element>
+                                                                <xs:element name="cadiListSeparatorChar" type="xs:string" minOccurs="0" maxOccurs="1">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation xml:lang="en-US">
+                                                                            <osd:label>List separator character</osd:label>
+                                                                        </xs:documentation>
+                                                                        <xs:appinfo>
+                                                                            <osd:information>SHOW-WHEN:/cadiSourceFileGroup/cadiFileImportMode="CSV" and /cadiSourceFileGroup/cadiCsvImportAttributes/cadiListSeparator="O"</osd:information>
+                                                                        </xs:appinfo>
+                                                                    </xs:annotation>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                    <xs:element name="cadiXmlImportAttributes" minOccurs="0" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>XML Import attributes</osd:label>
+                                                            </xs:documentation>
+                                                            <xs:appinfo>
+                                                                <osd:information>SHOW-WHEN:/cadiSourceFileGroup/cadiFileImportMode="XML"</osd:information>
+                                                                <osd:defaultView>
+                                                                    <displayMode>expanded</displayMode>
+                                                                </osd:defaultView>
+                                                            </xs:appinfo>
+                                                        </xs:annotation>
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="cadiImportMode" minOccurs="0" maxOccurs="1" default="U">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation xml:lang="en-US">
+                                                                            <osd:label>Import mode</osd:label>
+                                                                        </xs:documentation>
+                                                                        <xs:appinfo>
+                                                                            <osd:information>SHOW-WHEN:/cadiSourceFileGroup/cadiFileImportMode="XML"</osd:information>
+                                                                        </xs:appinfo>
+                                                                    </xs:annotation>
+                                                                    <xs:simpleType>
+                                                                        <xs:restriction base="xs:string">
+                                                                            <xs:enumeration osd:label="Update or Insert" value="U"/>
+                                                                            <xs:enumeration osd:label="Insert only" value="I"/>
+                                                                            <xs:enumeration osd:label="Update only" value="M"/>
+                                                                            <xs:enumeration osd:label="Replace (synchronise)" value="R"/>
+                                                                        </xs:restriction>
+                                                                    </xs:simpleType>
+                                                                </xs:element>
+                                                                <xs:element name="cadiImportByDelta" type="xs:boolean" minOccurs="0" maxOccurs="1" default="false">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation xml:lang="en-US">
+                                                                            <osd:label>By delta</osd:label>
+                                                                        </xs:documentation>
+                                                                        <xs:appinfo>
+                                                                            <osd:information>SHOW-WHEN:/cadiSourceFileGroup/cadiFileImportMode="XML"</osd:information>
+                                                                        </xs:appinfo>
+                                                                    </xs:annotation>
+                                                                </xs:element>
+                                                                <xs:element name="cadiSetMissingtoNull" type="xs:boolean" minOccurs="0" maxOccurs="1" default="true">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation xml:lang="en-US">
+                                                                            <osd:label>Set missing columns to null</osd:label>
+                                                                        </xs:documentation>
+                                                                        <xs:appinfo>
+                                                                            <osd:information>SHOW-WHEN:/cadiSourceFileGroup/cadiFileImportMode="XML"</osd:information>
+                                                                        </xs:appinfo>
+                                                                    </xs:annotation>
+                                                                </xs:element>
+                                                                <xs:element name="cadiIgnoreExtraCols" type="xs:boolean" minOccurs="0" maxOccurs="1" default="true">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation xml:lang="en-US">
+                                                                            <osd:label>Ignore extra columns</osd:label>
+                                                                        </xs:documentation>
+                                                                        <xs:appinfo>
+                                                                            <osd:information>SHOW-WHEN:/cadiSourceFileGroup/cadiFileImportMode="XML"</osd:information>
+                                                                        </xs:appinfo>
+                                                                    </xs:annotation>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                    <xs:element name="cadiDexImportAttributes">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Data exchange import attributes</osd:label>
+                                                            </xs:documentation>
+                                                            <xs:appinfo>
+                                                                <osd:defaultView>
+                                                                    <displayMode>expanded</displayMode>
+                                                                </osd:defaultView>
+                                                            </xs:appinfo>
+                                                        </xs:annotation>
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="dexImportType" minOccurs="0" maxOccurs="1">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation xml:lang="en-US">
+                                                                            <osd:label>Import type</osd:label>
+                                                                        </xs:documentation>
+                                                                    </xs:annotation>
+                                                                    <xs:simpleType>
+                                                                        <xs:restriction base="xs:string">
+                                                                            <xs:enumeration osd:label="CSV" value="CSV"/>
+                                                                            <xs:enumeration osd:label="EXCEL FOR SINGLE TABLE" value="EXCEL_FOR_SINGLE_TABLE"/>
+                                                                        </xs:restriction>
+                                                                    </xs:simpleType>
+                                                                </xs:element>
+                                                                <xs:element name="dexPreferenceName" type="xs:string" minOccurs="0" maxOccurs="1">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation xml:lang="en-US">
+                                                                            <osd:label>Preference name</osd:label>
+                                                                        </xs:documentation>
+                                                                    </xs:annotation>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                    <xs:element name="cadiCommitThreshold" type="xs:int" minOccurs="0" maxOccurs="1" default="200">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Commit threshold</osd:label>
+                                                                <osd:description>The number of record to import from the file before committing the record to the target table.</osd:description>
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="cadiArchiveFolder" type="xs:string" minOccurs="0" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Archive folder path</osd:label>
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="cadiKeepArchiveHours" type="xs:int" minOccurs="0" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Keep files for (hours)</osd:label>
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="cadiFailedFolderPath" type="xs:string" minOccurs="0" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Failed folder path</osd:label>
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="cadiKeepFailedHours" type="xs:int" minOccurs="0" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Keep failed files for (hours)</osd:label>
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="cadiBatchIdRegex" type="xs:string" minOccurs="0" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Batch Id pattern</osd:label>
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="cadiCrcFileName" type="xs:string" minOccurs="0" maxOccurs="1" default="MD5">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>CRC file name extension</osd:label>
+                                                    <osd:description>A CRC file must use the same name as the file it was generated from, but have a different file extension.</osd:description>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="CADImonitor" minOccurs="1" maxOccurs="1">
+                    <xs:annotation>
+                        <xs:documentation xml:lang="en-US">
+                            <osd:label>Monitor</osd:label>
+                        </xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="CADIImportProcess" minOccurs="0" maxOccurs="unbounded">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Import Process</osd:label>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:table>
+                                            <primaryKeys>/cadiProcessId /cadiid </primaryKeys>
+                                            <defaultLabel>${./cadiName} ${./cadiid} ${./cadiProcessId}</defaultLabel>
+                                            <defaultView>
+                                                <displayOfGroups>tab</displayOfGroups>
+                                            </defaultView>
+                                        </osd:table>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="cadiProcessId" type="xs:string" minOccurs="1" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Process Id</osd:label>
+                                                </xs:documentation>
+                                                <xs:appinfo>
+                                                    <osd:otherFacets>
+                                                        <osd:tableRef>
+                                                            <tablePath>/root/CADIprocesses</tablePath>
+                                                        </osd:tableRef>
+                                                    </osd:otherFacets>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiid" type="xs:string" minOccurs="1" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Import definition</osd:label>
+                                                </xs:documentation>
+                                                <xs:appinfo>
+                                                    <osd:otherFacets>
+                                                        <osd:tableRef>
+                                                            <tablePath>/root/CADIdefinitions/CADIdefinition</tablePath>
+                                                        </osd:tableRef>
+                                                    </osd:otherFacets>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiProcessState" minOccurs="0" maxOccurs="1" default="Q">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>State</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                    <xs:length value="1"/>
+                                                    <xs:enumeration osd:label="Queued" value="Q"/>
+                                                    <xs:enumeration osd:label="Held" value="H"/>
+                                                    <xs:enumeration osd:label="Active" value="A"/>
+                                                    <xs:enumeration osd:label="Complete" value="C"/>
+                                                    <xs:enumeration osd:label="Failed" value="F"/>
+                                                    <xs:enumeration osd:label="Terminated" value="T"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="cadiName" minOccurs="0" maxOccurs="1" default="import definition">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Name</osd:label>
+                                                    <osd:description>Enter a short name to describe the import definition (up to 30 characters)&#13;
+[ ${name} ]</osd:description>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                    <xs:maxLength value="50"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="cadiTargetDataspace" type="xs:string" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Dataspace</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiTargetDataset" type="xs:string" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Dataset</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiErrors" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Errors</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="tablesGroup" minOccurs="1" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Import targets</osd:label>
+                                                </xs:documentation>
+                                                <xs:appinfo>
+                                                    <osd:defaultView>
+                                                        <displayMode>tab</displayMode>
+                                                    </osd:defaultView>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="cadiTables" type="xs:string" minOccurs="0" maxOccurs="0">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Import targets</osd:label>
+                                                            </xs:documentation>
+                                                            <xs:appinfo>
+                                                                <osd:association>
+                                                                    <tableRefInverse>
+                                                                        <fieldToSource>/root/CADImonitor/CADIImportTables/cadiDefinition</fieldToSource>
+                                                                    </tableRefInverse>
+                                                                </osd:association>
+                                                                <osd:defaultView>
+                                                                    <hiddenInDataServices>true</hiddenInDataServices>
+                                                                    <displayMode>inline</displayMode>
+                                                                    <tabularView>
+                                                                        <column>/cadiTableSequence</column>
+                                                                        <column>/cadiTargetDataspace</column>
+                                                                        <column>/cadiTargetDataset</column>
+                                                                        <column>/cadiTargetTable</column>
+                                                                        <column>/cadiTableOptional</column>
+                                                                        <column>/cadiProcessState</column>
+                                                                        <sort>
+                                                                            <nodePath>/cadiTableSequence</nodePath>
+                                                                            <isAscending>true</isAscending>
+                                                                        </sort>
+                                                                        <sort>
+                                                                            <nodePath>/cadiTableId</nodePath>
+                                                                            <isAscending>true</isAscending>
+                                                                        </sort>
+                                                                    </tabularView>
+                                                                </osd:defaultView>
+                                                            </xs:appinfo>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="CADIImportTables" minOccurs="0" maxOccurs="unbounded">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Target Tables</osd:label>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:table>
+                                            <primaryKeys>/cadiDefinition /cadiTableId </primaryKeys>
+                                            <defaultLabel>${./cadiTargetTable}</defaultLabel>
+                                        </osd:table>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="cadiDefinition" type="xs:string" minOccurs="1" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Definition</osd:label>
+                                                </xs:documentation>
+                                                <xs:appinfo>
+                                                    <osd:otherFacets>
+                                                        <osd:tableRef>
+                                                            <tablePath>/root/CADImonitor/CADIImportProcess</tablePath>
+                                                        </osd:tableRef>
+                                                    </osd:otherFacets>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiTableId" type="xs:string" minOccurs="1" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Target table definition</osd:label>
+                                                </xs:documentation>
+                                                <xs:appinfo>
+                                                    <osd:otherFacets>
+                                                        <osd:tableRef>
+                                                            <tablePath>/root/CADIdefinitions/CADItargetTables</tablePath>
+                                                        </osd:tableRef>
+                                                    </osd:otherFacets>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiProcessState" minOccurs="0" maxOccurs="1" default="Q">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>State</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                    <xs:length value="1"/>
+                                                    <xs:enumeration osd:label="Queued" value="Q"/>
+                                                    <xs:enumeration osd:label="Held" value="H"/>
+                                                    <xs:enumeration osd:label="Active" value="A"/>
+                                                    <xs:enumeration osd:label="Complete" value="C"/>
+                                                    <xs:enumeration osd:label="Failed" value="F"/>
+                                                    <xs:enumeration osd:label="Terminated" value="T"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="cadiTableSequence" type="xs:int" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Table sequence</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiTargetDataspace" type="xs:string" minOccurs="1" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Target data space</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiTargetDataset" type="xs:string" minOccurs="1" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Target dataset</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiTargetTable" type="xs:string" minOccurs="1" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Target table</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiTableOptional" type="xs:boolean" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Table optional</osd:label>
+                                                    <osd:description>&lt;b&gt;Yes&lt;/b&gt;: There does not have to be a file to import into this table for the import process to start.&lt;/br&gt;&#13;
+&lt;b&gt;No&lt;/b&gt;: There must be a file to import into this table for the import process to start.</osd:description>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiBatchId" type="xs:string" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Batch Id</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiImportedFiles" type="xs:string" minOccurs="0" maxOccurs="0">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Imported files</osd:label>
+                                                </xs:documentation>
+                                                <xs:appinfo>
+                                                    <osd:association>
+                                                        <tableRefInverse>
+                                                            <fieldToSource>/root/CADImonitor/CADIImportedFiles/cadiTatgetTable</fieldToSource>
+                                                        </tableRefInverse>
+                                                    </osd:association>
+                                                    <osd:defaultView>
+                                                        <hiddenInDataServices>true</hiddenInDataServices>
+                                                        <displayMode>inline</displayMode>
+                                                        <tabularView>
+                                                            <column>/cadiSourceFileGroup/cadiFileFolder</column>
+                                                            <column>/cadiSourceFileGroup/cadiFileName</column>
+                                                            <column>/cadiRecordsCreated</column>
+                                                            <column>/cadiRecordsUpdated</column>
+                                                            <column>/cadiRecordsDeleted</column>
+                                                            <column>/cadiRecordsUnchanged</column>
+                                                            <sort>
+                                                                <nodePath>/cadiTatgetTable</nodePath>
+                                                                <isAscending>true</isAscending>
+                                                            </sort>
+                                                            <sort>
+                                                                <nodePath>/cadiImportFileId</nodePath>
+                                                                <isAscending>true</isAscending>
+                                                            </sort>
+                                                        </tabularView>
+                                                    </osd:defaultView>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiErrors" minOccurs="0" maxOccurs="unbounded">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Errors</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                    <xs:maxLength value="2000"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="CADIImportedFiles" minOccurs="0" maxOccurs="unbounded">
+                                <xs:annotation>
+                                    <xs:documentation xml:lang="en-US">
+                                        <osd:label>Source Files</osd:label>
+                                    </xs:documentation>
+                                    <xs:appinfo>
+                                        <osd:table>
+                                            <primaryKeys>/cadiTatgetTable /cadiImportFileId </primaryKeys>
+                                            <defaultLabel>${./cadiSourceFileGroup/cadiFileFolder}${./cadiSourceFileGroup/cadiFileName}</defaultLabel>
+                                        </osd:table>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="cadiTatgetTable" type="xs:string" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Target table</osd:label>
+                                                </xs:documentation>
+                                                <xs:appinfo>
+                                                    <osd:otherFacets>
+                                                        <osd:tableRef>
+                                                            <tablePath>/root/CADImonitor/CADIImportTables</tablePath>
+                                                        </osd:tableRef>
+                                                    </osd:otherFacets>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiImportFileId" type="xs:string" minOccurs="1" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Source file definition</osd:label>
+                                                </xs:documentation>
+                                                <xs:appinfo>
+                                                    <osd:otherFacets>
+                                                        <osd:tableRef>
+                                                            <tablePath>/root/CADIdefinitions/CADIimportFiles</tablePath>
+                                                        </osd:tableRef>
+                                                    </osd:otherFacets>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiProcessState" minOccurs="0" maxOccurs="1" default="Q">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>State</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                    <xs:length value="1"/>
+                                                    <xs:enumeration osd:label="Queued" value="Q"/>
+                                                    <xs:enumeration osd:label="Held" value="H"/>
+                                                    <xs:enumeration osd:label="Active" value="A"/>
+                                                    <xs:enumeration osd:label="Complete" value="C"/>
+                                                    <xs:enumeration osd:label="Failed" value="F"/>
+                                                    <xs:enumeration osd:label="Terminated" value="T"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="cadiFileDescription" type="osd:text" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Description</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiSourceFileGroup" minOccurs="1" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:appinfo>
+                                                    <osd:defaultView>
+                                                        <displayMode>expanded</displayMode>
+                                                    </osd:defaultView>
+                                                </xs:appinfo>
+                                            </xs:annotation>
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="cadiFileName" type="xs:string" minOccurs="0" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>File name</osd:label>
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="cadiFileFolder" type="xs:string" minOccurs="0" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>Folder path</osd:label>
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="cadiFileImportMode" minOccurs="0" maxOccurs="1" default="XML">
+                                                        <xs:annotation>
+                                                            <xs:documentation xml:lang="en-US">
+                                                                <osd:label>File import mode</osd:label>
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                        <xs:simpleType>
+                                                            <xs:restriction base="xs:string">
+                                                                <xs:enumeration osd:label="Import CSV" value="CSV"/>
+                                                                <xs:enumeration osd:label="Import XML" value="XML"/>
+                                                            </xs:restriction>
+                                                        </xs:simpleType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="cadiRecordsCreated" type="xs:int" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Record created</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiRecordsUpdated" type="xs:int" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Records updated</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiRecordsDeleted" type="xs:int" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Records deleted</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiRecordsUnchanged" type="xs:int" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Records unchanged</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cadiErrors" minOccurs="0" maxOccurs="unbounded">
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en-US">
+                                                    <osd:label>Errors</osd:label>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                    <xs:maxLength value="2000"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="cadiParam">
+        <xs:annotation>
+            <xs:documentation xml:lang="en-US">
+                <osd:label>Workflow parameter</osd:label>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="cadiDataValue" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en-US">
+                        <osd:label>Value</osd:label>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="cadiDatacontextName" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en-US">
+                        <osd:label>Data context name</osd:label>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="fileData" osd:class="com.ebxps.cadi.adpatation.SourceFileBean">
+        <xs:annotation>
+            <xs:documentation xml:lang="en-US">
+                <osd:label>File data</osd:label>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="cadiFileName" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en-US">
+                        <osd:label>File name</osd:label>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="cadiFileFolder" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en-US">
+                        <osd:label>Folder path</osd:label>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="cadiFileImportMode" minOccurs="0" maxOccurs="1" default="XML">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en-US">
+                        <osd:label>File import mode</osd:label>
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration osd:label="Import CSV" value="CSV"/>
+                        <xs:enumeration osd:label="Import XML" value="XML"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="cadiCsvImportAttributes" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en-US">
+                        <osd:label>CSV Import attributes</osd:label>
+                    </xs:documentation>
+                    <xs:appinfo>
+                        <osd:information>SHOW-WHEN:/cadiSourceFileGroup/cadiFileImportMode="CSV"</osd:information>
+                        <osd:defaultView>
+                            <displayMode>expanded</displayMode>
+                        </osd:defaultView>
+                    </xs:appinfo>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="cadiImportMode" minOccurs="0" maxOccurs="1" default="U">
+                            <xs:annotation>
+                                <xs:documentation xml:lang="en-US">
+                                    <osd:label>Import mode</osd:label>
+                                </xs:documentation>
+                                <xs:appinfo>
+                                    <osd:information>SHOW-WHEN:/cadiSourceFileGroup/cadiFileImportMode="CSV"</osd:information>
+                                </xs:appinfo>
+                            </xs:annotation>
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:enumeration osd:label="Update or Insert" value="U"/>
+                                    <xs:enumeration osd:label="Insert only" value="I"/>
+                                    <xs:enumeration osd:label="Update only" value="M"/>
+                                    <xs:enumeration osd:label="Replace (synchronise)" value="R"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="cadiFileEncoding" type="xs:string" minOccurs="0" maxOccurs="1" default="UTF-8">
+                            <xs:annotation>
+                                <xs:documentation xml:lang="en-US">
+                                    <osd:label>File encoding</osd:label>
+                                </xs:documentation>
+                                <xs:appinfo>
+                                    <osd:information>SHOW-WHEN:/cadiSourceFileGroup/cadiFileImportMode="CSV"</osd:information>
+                                </xs:appinfo>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="cadiColumnHeader" minOccurs="0" maxOccurs="1" default="L">
+                            <xs:annotation>
+                                <xs:documentation xml:lang="en-US">
+                                    <osd:label>Column header</osd:label>
+                                </xs:documentation>
+                                <xs:appinfo>
+                                    <osd:information>SHOW-WHEN:/cadiSourceFileGroup/cadiFileImportMode="CSV"</osd:information>
+                                </xs:appinfo>
+                            </xs:annotation>
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:enumeration osd:label="No header" value="N"/>
+                                    <xs:enumeration osd:label="Label" value="L"/>
+                                    <xs:enumeration osd:label="Field Xpath" value="X"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="cadiFieldSeparator" minOccurs="0" maxOccurs="1">
+                            <xs:annotation>
+                                <xs:documentation xml:lang="en-US">
+                                    <osd:label>Field separator</osd:label>
+                                </xs:documentation>
+                                <xs:appinfo>
+                                    <osd:information>SHOW-WHEN:/cadiSourceFileGroup/cadiFileImportMode="CSV"</osd:information>
+                                </xs:appinfo>
+                            </xs:annotation>
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:enumeration osd:label="Comma" value="C"/>
+                                    <xs:enumeration osd:label="Semicolon" value="S"/>
+                                    <xs:enumeration osd:label="Space" value="B"/>
+                                    <xs:enumeration osd:label="Tab" value="T"/>
+                                    <xs:enumeration osd:label="Other" value="O"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="cadiFieldSeparatorChar" type="xs:string" minOccurs="0" maxOccurs="1">
+                            <xs:annotation>
+                                <xs:documentation xml:lang="en-US">
+                                    <osd:label>Field separator character</osd:label>
+                                </xs:documentation>
+                                <xs:appinfo>
+                                    <osd:information>SHOW-WHEN:/cadiSourceFileGroup/cadiFileImportMode="CSV"</osd:information>
+                                </xs:appinfo>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="cadiListSeparator" minOccurs="0" maxOccurs="1">
+                            <xs:annotation>
+                                <xs:documentation xml:lang="en-US">
+                                    <osd:label>List separator</osd:label>
+                                </xs:documentation>
+                                <xs:appinfo>
+                                    <osd:information>SHOW-WHEN:/cadiSourceFileGroup/cadiFileImportMode="CSV"</osd:information>
+                                </xs:appinfo>
+                            </xs:annotation>
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:enumeration osd:label="Comma" value="C"/>
+                                    <xs:enumeration osd:label="Line return" value="L"/>
+                                    <xs:enumeration osd:label="Semicolon" value="S"/>
+                                    <xs:enumeration osd:label="Space" value="B"/>
+                                    <xs:enumeration osd:label="Tab" value="T"/>
+                                    <xs:enumeration osd:label="Other" value="O"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="cadiListSeparatorChar" type="xs:string" minOccurs="0" maxOccurs="1">
+                            <xs:annotation>
+                                <xs:documentation xml:lang="en-US">
+                                    <osd:label>List separator character</osd:label>
+                                </xs:documentation>
+                                <xs:appinfo>
+                                    <osd:information>SHOW-WHEN:/cadiSourceFileGroup/cadiFileImportMode="CSV"</osd:information>
+                                </xs:appinfo>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="cadiXmlImportAttributes" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en-US">
+                        <osd:label>XML Import attributes</osd:label>
+                    </xs:documentation>
+                    <xs:appinfo>
+                        <osd:information>SHOW-WHEN:/cadiSourceFileGroup/cadiFileImportMode="XML"</osd:information>
+                        <osd:defaultView>
+                            <displayMode>expanded</displayMode>
+                        </osd:defaultView>
+                    </xs:appinfo>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="cadiImportMode" minOccurs="0" maxOccurs="1" default="U">
+                            <xs:annotation>
+                                <xs:documentation xml:lang="en-US">
+                                    <osd:label>Import mode</osd:label>
+                                </xs:documentation>
+                                <xs:appinfo>
+                                    <osd:information>SHOW-WHEN:/cadiSourceFileGroup/cadiFileImportMode="XML"</osd:information>
+                                </xs:appinfo>
+                            </xs:annotation>
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:enumeration osd:label="Update or Insert" value="U"/>
+                                    <xs:enumeration osd:label="Insert only" value="I"/>
+                                    <xs:enumeration osd:label="Update only" value="M"/>
+                                    <xs:enumeration osd:label="Replace (synchronise)" value="R"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="cadiImportByDelta" type="xs:boolean" minOccurs="0" maxOccurs="1" default="false">
+                            <xs:annotation>
+                                <xs:documentation xml:lang="en-US">
+                                    <osd:label>By delta</osd:label>
+                                </xs:documentation>
+                                <xs:appinfo>
+                                    <osd:information>SHOW-WHEN:/cadiSourceFileGroup/cadiFileImportMode="XML"</osd:information>
+                                </xs:appinfo>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="cadiSetMissingtoNull" type="xs:boolean" minOccurs="0" maxOccurs="1" default="true">
+                            <xs:annotation>
+                                <xs:documentation xml:lang="en-US">
+                                    <osd:label>Set missing columns to null</osd:label>
+                                </xs:documentation>
+                                <xs:appinfo>
+                                    <osd:information>SHOW-WHEN:/cadiSourceFileGroup/cadiFileImportMode="XML"</osd:information>
+                                </xs:appinfo>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="cadiIgnoreExtraCols" type="xs:boolean" minOccurs="0" maxOccurs="1" default="true">
+                            <xs:annotation>
+                                <xs:documentation xml:lang="en-US">
+                                    <osd:label>Ignore extra columns</osd:label>
+                                </xs:documentation>
+                                <xs:appinfo>
+                                    <osd:information>SHOW-WHEN:/cadiSourceFileGroup/cadiFileImportMode="XML"</osd:information>
+                                </xs:appinfo>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="cadiArchiveFolder" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en-US">
+                        <osd:label>Archive folder path</osd:label>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="cadiKeepArchiveHours" type="xs:int" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en-US">
+                        <osd:label>Keep files for (hours)</osd:label>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="cadiFailedFolderPath" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en-US">
+                        <osd:label>Failed folder path</osd:label>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="cadiKeepFailedHours" type="xs:int" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en-US">
+                        <osd:label>Keep failed files for (hours)</osd:label>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="cadiBatchIdRegex" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en-US">
+                        <osd:label>Batch Id pattern</osd:label>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="fileExecData" osd:class="com.ebxps.cadi.adpatation.SourceFileBean">
+        <xs:annotation>
+            <xs:documentation xml:lang="en-US">
+                <osd:label>File execution data</osd:label>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="cadiFileName" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en-US">
+                        <osd:label>File name</osd:label>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="cadiFileFolder" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en-US">
+                        <osd:label>Folder path</osd:label>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="cadiFileImportMode" minOccurs="0" maxOccurs="1" default="XML">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en-US">
+                        <osd:label>File import mode</osd:label>
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration osd:label="Import CSV" value="CSV"/>
+                        <xs:enumeration osd:label="Import XML" value="XML"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="cadiCsvImportAttributes" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en-US">
+                        <osd:label>CSV Import attributes</osd:label>
+                    </xs:documentation>
+                    <xs:appinfo>
+                        <osd:information>SHOW-WHEN:/cadiSourceFileGroup/cadiFileImportMode="CSV"</osd:information>
+                        <osd:defaultView>
+                            <displayMode>expanded</displayMode>
+                        </osd:defaultView>
+                    </xs:appinfo>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="cadiImportMode" minOccurs="0" maxOccurs="1" default="U">
+                            <xs:annotation>
+                                <xs:documentation xml:lang="en-US">
+                                    <osd:label>Import mode</osd:label>
+                                </xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:enumeration osd:label="Update or Insert" value="U"/>
+                                    <xs:enumeration osd:label="Insert only" value="I"/>
+                                    <xs:enumeration osd:label="Update only" value="M"/>
+                                    <xs:enumeration osd:label="Replace (synchronise)" value="R"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="cadiFileEncoding" type="xs:string" minOccurs="0" maxOccurs="1" default="UTF-8">
+                            <xs:annotation>
+                                <xs:documentation xml:lang="en-US">
+                                    <osd:label>File encoding</osd:label>
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="cadiColumnHeader" minOccurs="0" maxOccurs="1" default="L">
+                            <xs:annotation>
+                                <xs:documentation xml:lang="en-US">
+                                    <osd:label>Column header</osd:label>
+                                </xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:enumeration osd:label="No header" value="N"/>
+                                    <xs:enumeration osd:label="Label" value="L"/>
+                                    <xs:enumeration osd:label="Field Xpath" value="X"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="cadiFieldSeparator" minOccurs="0" maxOccurs="1">
+                            <xs:annotation>
+                                <xs:documentation xml:lang="en-US">
+                                    <osd:label>Field separator</osd:label>
+                                </xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:enumeration osd:label="Comma" value="C"/>
+                                    <xs:enumeration osd:label="Semicolon" value="S"/>
+                                    <xs:enumeration osd:label="Space" value="B"/>
+                                    <xs:enumeration osd:label="Tab" value="T"/>
+                                    <xs:enumeration osd:label="Other" value="O"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="cadiFieldSeparatorChar" type="xs:string" minOccurs="0" maxOccurs="1">
+                            <xs:annotation>
+                                <xs:documentation xml:lang="en-US">
+                                    <osd:label>Field separator character</osd:label>
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="cadiListSeparator" minOccurs="0" maxOccurs="1">
+                            <xs:annotation>
+                                <xs:documentation xml:lang="en-US">
+                                    <osd:label>List separator</osd:label>
+                                </xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:enumeration osd:label="Comma" value="C"/>
+                                    <xs:enumeration osd:label="Line return" value="L"/>
+                                    <xs:enumeration osd:label="Semicolon" value="S"/>
+                                    <xs:enumeration osd:label="Space" value="B"/>
+                                    <xs:enumeration osd:label="Tab" value="T"/>
+                                    <xs:enumeration osd:label="Other" value="O"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="cadiListSeparatorChar" type="xs:string" minOccurs="0" maxOccurs="1">
+                            <xs:annotation>
+                                <xs:documentation xml:lang="en-US">
+                                    <osd:label>List separator character</osd:label>
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="cadiXmlImportAttributes" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en-US">
+                        <osd:label>XML Import attributes</osd:label>
+                    </xs:documentation>
+                    <xs:appinfo>
+                        <osd:defaultView>
+                            <displayMode>expanded</displayMode>
+                        </osd:defaultView>
+                    </xs:appinfo>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="cadiImportMode" minOccurs="0" maxOccurs="1" default="U">
+                            <xs:annotation>
+                                <xs:documentation xml:lang="en-US">
+                                    <osd:label>Import mode</osd:label>
+                                </xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:enumeration osd:label="Update or Insert" value="U"/>
+                                    <xs:enumeration osd:label="Insert only" value="I"/>
+                                    <xs:enumeration osd:label="Update only" value="M"/>
+                                    <xs:enumeration osd:label="Replace (synchronise)" value="R"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="cadiImportByDelta" type="xs:boolean" minOccurs="0" maxOccurs="1" default="false">
+                            <xs:annotation>
+                                <xs:documentation xml:lang="en-US">
+                                    <osd:label>By delta</osd:label>
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="cadiSetMissingtoNull" type="xs:boolean" minOccurs="0" maxOccurs="1" default="true">
+                            <xs:annotation>
+                                <xs:documentation xml:lang="en-US">
+                                    <osd:label>Set missing columns to null</osd:label>
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="cadiIgnoreExtraCols" type="xs:boolean" minOccurs="0" maxOccurs="1" default="true">
+                            <xs:annotation>
+                                <xs:documentation xml:lang="en-US">
+                                    <osd:label>Ignore extra columns</osd:label>
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="cadiArchiveFolder" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en-US">
+                        <osd:label>Archive folder path</osd:label>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="cadiKeepArchiveHours" type="xs:int" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en-US">
+                        <osd:label>Keep files for (hours)</osd:label>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="cadiFailedFolderPath" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en-US">
+                        <osd:label>Failed folder path</osd:label>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="cadiKeepFailedHours" type="xs:int" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en-US">
+                        <osd:label>Keep failed files for (hours)</osd:label>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="cadiBatchIdRegex" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en-US">
+                        <osd:label>Batch Id pattern</osd:label>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
